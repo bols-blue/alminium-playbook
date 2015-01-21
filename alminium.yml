@@ -12,9 +12,9 @@
     - apt: name=git state=present
  
     # テスト
-    #  version="{{ branch }}" accept_hostkey="yes"
-    
     - git: repo=https://github.com/bols-blue/alminium.git
            dest={{ repos_dir }} version={{ branch }} 
-
+    - command: bash ./smelt
+      args:
+         chdir: "{{ repos_dir }}"
 
