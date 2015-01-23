@@ -1,0 +1,26 @@
+---
+- hosts: all
+  sudo: True
+  vars:
+    repos_dir: "./alminium"
+    branch: ubuntu-12.04
+  tasks:
+    - name: "DBバックアップの作成"
+      command: mysqldump -uroot alminium -r ~/alminium.dump
+
+    - name: "ファイルのバックアップ"
+      command: tar czf ~/opt_alminium_files.tar.gz .
+      args:
+         chdir: "/opt/alminium/files/"
+
+    - name: "レポジトリのバックアップ"
+      command: tar czf ~/var_opt_alminium_files.tar.gz .
+      args:
+         chdir: "/var/opt/alminium/"
+    
+    - name: "バックアップファイルのダウンロード"
+      fetch: src=~/alminium.dump dest=./
+
+    - fetch: src=~/opt_alminium_files.tar.gz dest=./
+
+    - fetch: src=~/var_opt_alminium_files.tar.gz dest=./
