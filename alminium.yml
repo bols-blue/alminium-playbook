@@ -6,15 +6,18 @@
     branch: ubuntu-12.04
   tasks:
     # Run the equivalent of "apt-get update" as a separate step
-    - apt: update_cache=yes
+    - name: "apt のアップデート"
+      apt: update_cache=yes
 
     # Install the package "foo"
-    - apt: name=git state=present
+    - name: "Gitのインストール"
+      apt: name=git state=present
  
     # テスト
-    - git: repo=https://github.com/bols-blue/alminium.git
+    - name: "alminiumのチェックアウト"
+      git: repo=https://github.com/bols-blue/alminium.git
            dest={{ repos_dir }} version={{ branch }} 
-    - command: bash ./smelt
-      args:
-         chdir: "{{ repos_dir }}"
+    #- command: bash ./smelt
+    #  args:
+    #     chdir: "{{ repos_dir }}"
 

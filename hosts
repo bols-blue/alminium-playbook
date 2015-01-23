@@ -1,5 +1,7 @@
 [alminium]
-104.155.217.85
+oneteam-developer2.cloudapp.net
+[alminium:vars]
+ansible_ssh_user=azureuser
 
 [all:vars]
 ansible_ssh_user=suehiro
